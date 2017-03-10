@@ -1,0 +1,106 @@
+# CalculoActuarial
+Sub ejemplo()
+
+Range("b10").Value = "Informe de sinietros"
+Range("b11").Value = "Informe par el año 2016"
+tarifa = "Tarifa e " & Range("b11").Value
+Range("b12").Value = tarifa
+Range("b10").Borders.Color = RGB(68, 172, 204)
+Range("b11").Interior.Color = RGB(68, 150, 120)
+Range("b12").Select
+Selection.Font.Bold = True 'FALSE
+Selection.Font.Italic = True 'FALSE
+
+
+End Sub
+
+Sub ejemplo2()
+'para emplear lo rangos de manera más precisa
+'es adecuado indicar el nombre de la hoja con la
+'que se va a iniciar el trabajo.
+Worksheets("Hoja1").Range("a12").Value = "Informe 1"
+Worksheets("Sheet 2").Range("a12").Value = "Informe Sheet 2"
+
+End Sub
+
+Sub cajas_texto()
+
+MsgBox ("Formulario de suscripción")
+MsgBox ("introduzca la información solicitada")
+ramo = InputBox("Introduzca el ramo del negocio", "Datos de suscripción")
+
+End Sub
+
+Sub data()
+
+MsgBox ("Bienvenido al sistema. Si desea anexar datos dé aceptar")
+
+ramo = InputBox("Introduzca el ramo del negocio", "Datos de suscripción")
+nommen = InputBox("Introduzca el nombre del negocio", "Datos de suscripción")
+poli = InputBox("Introduzca el número de póliza", "Datos de suscripción")
+agen = InputBox("Introduzca el Agente del negocio", "Datos de suscripción")
+
+Worksheets("Hoja1").Range("a6: d11").Interior.Color = RGB(216, 228, 188)
+Worksheets("Hoja2").Range("a6: d11").Interior.Color = RGB(216, 228, 188)
+
+
+Worksheets("Hoja1").Range("c5").Value = "Informe No." & Application.WorksheetFunction.RandBetween(4000, 7000)
+Worksheets("Hoja1").Range("a6").Value = "Ramo: " & ramo
+Worksheets("Hoja1").Range("b6").Value = "Nombre del negocio: " & nommen
+Worksheets("Hoja1").Range("c6").Value = "Póliza No. " & poli
+Worksheets("Hoja1").Range("d6").Value = "Agente: " & agen
+Worksheets("Hoja1").Range("a7").Value = "Número de siniestros: "
+m = Application.WorksheetFunction.RandBetween(40, 70)
+Worksheets("Hoja1").Range("b7").Value = m
+Worksheets("Hoja1").Range("a8").Value = " Valor de Siniestro 1: "
+Worksheets("Hoja1").Range("a9").Value = " Valor de Siniestro 2: "
+Worksheets("Hoja1").Range("a10").Value = " Valor de Siniestro 3: "
+Worksheets("Hoja1").Range("a11").Value = " Valor de Siniestro 4: "
+
+Worksheets("Hoja1").Range("b8").Value = Application.WorksheetFunction.RandBetween(4000, 7000)
+Worksheets("Hoja1").Range("b9").Value = Application.WorksheetFunction.RandBetween(4000, 7000)
+Worksheets("Hoja1").Range("b10").Value = Application.WorksheetFunction.RandBetween(4000, 7000)
+Worksheets("Hoja1").Range("b11").Value = Application.WorksheetFunction.RandBetween(4000, 7000)
+a = Range("b8").Value
+b = Range("b9").Value
+c = Range("b10").Value
+d = Range("b11").Value
+
+Worksheets("Hoja2").Range("c5").Value = "Estadísticas y resultados."
+Worksheets("Hoja2").Range("a6").Value = "Ramo: " & ramo
+Worksheets("Hoja2").Range("b6").Value = "Nombre del negocio: " & nommen
+Worksheets("Hoja2").Range("c6").Value = "Póliza No. " & poli
+Worksheets("Hoja2").Range("d6").Value = "Agente: " & agen
+Worksheets("Hoja2").Range("a7").Value = "Número de siniestros: "
+Worksheets("Hoja2").Range("b7").Value = m
+Worksheets("Hoja2").Range("a8").Value = " Media "
+Worksheets("Hoja2").Range("a9").Value = " Desviación estándar"
+Worksheets("Hoja2").Range("a10").Value = " Máximo valor: "
+Worksheets("Hoja2").Range("a11").Value = " Mínimo valor: "
+
+Worksheets("Hoja2").Range("b8").Value = Application.WorksheetFunction.Average(Worksheets("Hoja1").Range("b8:b11").Value)
+Worksheets("Hoja2").Range("b9").Value = Application.WorksheetFunction.DevSq(Worksheets("Hoja1").Range("b8:b11").Value)
+Worksheets("Hoja2").Range("b10").Value = Application.WorksheetFunction.Max(Worksheets("Hoja1").Range("b8:b11").Value)
+Worksheets("Hoja2").Range("b11").Value = Application.WorksheetFunction.Min(Worksheets("Hoja1").Range("b8:b11").Value)
+
+
+End Sub
+
+
+Sub ejemplo_for()
+
+Worksheets("Hoja4").Activate
+n = 20
+'la estructura de un ciclo for se compone de 3secciones
+'la primera de ellas va a especificar los limites
+' la segunda las accoiones que se realizaran
+'la tercer seccion requiere terminar la sentencia
+
+Range("b2").Cells(1, 1).Value = "lista de valores"
+
+For i = 1 To n Step 2  'step es el incremento
+Range("b2").Cells(1 + i, 1).Value = i
+Next i
+
+
+End Sub
