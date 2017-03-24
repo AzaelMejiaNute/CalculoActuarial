@@ -1,0 +1,121 @@
+#######
+#crear una lista o secuencia
+
+seq(0:15)
+poliza <- (0:15); n <- 15
+pro_ejem <- dbinom(0, n, prob = 0.25)
+pro_ejem
+prob <- dbinom(poliza, n, prob = 0.25)
+prob
+
+########## 
+##la funcion de distribucion permite agrupas objetos
+
+informef <- cbind(poliza, prob)
+#### Gráfico de las probabilidades
+plot(poliza, prob, type = "b", xlab = "Poliza")
+#otra forma de graficar
+plot(poliza, prob, type = "l", xlab = "Poliza")
+points(poliza, prob)
+#calculo de probabilidades menores o iguales P[X<=x]
+F <- cumsum(prob)   ##lista la distribucion acumulada
+informe_acum <- cbind(poliza, F)
+informe_acum
+#otra forma de calculo
+Fx3 <- pbinom(3, n, prob = 0.25)
+Fx3
+Fx <- pbinom(poliza, n, prob = 0.25)
+Fx
+
+#####
+#####graficos de la distribuciuon acumulada
+### la probabilidad entre los puntos permanece constante
+informeE <- cbind(poliza, Fx)
+#dbinom devuelve P[X=k]
+#pbinom devuelve p[X<=k]
+#qbinom devuelve percentiles
+#rbinom genera números aleatoris con distribucion binomial
+plot(poliza, Fx, type = "s")
+plot(poliza, Fx, type = "b")
+points(poliza, prob, col = "Red")
+#calculo de media y varianza
+#E[X])= suma(xi*prob(xi))
+media1= sum(poliza* prob)
+media1
+#empleando los resultados de la distribucion dbinom
+media2 <- n*0.25     #E[X]=np
+media2
+segundo <- sum((poliza^2)*prob)
+segundo
+var <- segundo-(media1^2)
+var
+# Var[X]=npq
+var1 <- n*.25*.75
+var1
+
+#####
+#ejemplo para el calculo de percentiles
+#calcule el valor que deja por debajo al 30% de los siniestros
+q30 <- qbinom(0.3,n, prob = .25 )
+q30
+percentiles <- seq(0,1, by =.05)
+lpercent <- qbinom(percentiles, n, prob = 0.25)
+informe_p <- cbind(percentiles*100, lpercent)
+informe_p
+plot(informe_p, type = "b", xlab = "Percentiles", ylab = "Siniestros")
+
+#####
+##Analisis de los percentiles cómo se comportará la certera
+#calcular el tercer momento
+sesgo <- (1-2*.25)/((n*.75*.25)^.5) #(1-2p)/(npq)^.5
+sesgo
+#obtener las siguientes probabilidades
+#tener 9 siniestros P[X=9]
+neun <- dbinom(9, n, prob = .25)
+neun
+#Tener 5 o menos siniestros P[X<=5]
+fünf <- pbinom(5, n , prob = .25)
+fünf
+#tener más de 7 siniestros P[X>7]=1-P[X<=7]
+sieben <- 1-pbinom(7,n,.25)
+sieben
+#Tener 8 o más siniestros P[x>=8]= 1-P[X<8]=1-P[X<=8]+P[X=8]
+acht <- 1-pbinom(8, n, .25)+dbinom(8, n, .25)
+acht
+#tener al menos 4 y a lo mucho 11 P[4<=X<=11]
+entre4.11 <- pbinom(11, n, .25)-pbinom(3, n, .25)
+entre4.11
+s <- 4:11
+sum(dbinom(s, n, .25))
+#tener entere 1 y 8 siniestros   P[1<X<8]
+entre1.8 <- pbinom(7, n, .25)-pbinom(1, n, .25)
+entre1.8
+s1 <- 2:7
+sum(dbinom(s1, n, .25))
+
+######
+##se tiene una muestra de 820 pólizas del ramo de gastos médicos
+## la probabilidad de que una de ellas tenga siniestros es de 0.2%
+##Estudie la variable aleatoria suponiendo una distribucion binomial
+##Lo anterior debido a que se seleccionarán si la póliza tiene nú siniestros
+##x~B(80,.2), mi v.a =x= 0,1,2,...80
+##calcular todas las probabilidades
+##y districion acumulada con cumsum
+##Graficos de cada uno de ellas
+##media varianza desviacion estandar con las formulas de distribucion
+##Grafico en el que se precente probabilidades y acumuladas
+##a través de los valores esperados
+##calcular E[x^2-2X]
+##Obtener informes informes de los percentiles y de la cartera
+##analisis del sesgo
+##Prob de tener cinco siniestros de las polizas de la muestra
+##calcular la probabiliad de tener P[1<=X<8]
+##Calcular la probabiliad nde ytemer P[X<=3] o P[X>1]
+
+a <- 0:80
+p <- .2
+n=80
+fx <- dbinom(a, n, p)
+fx
+Fx <- cumsum(fx)
+Fx
