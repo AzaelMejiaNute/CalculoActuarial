@@ -1,0 +1,58 @@
+#El banco ofrece préstamos educativos a estudiantes de la ciudad de nueva york
+#la tasa de incumplimiento es de 45 y la probabilidad de que sean  de que sean de nivel
+#posgrado es de un 32% y licenciatura es 25%
+#l=45*.32
+#l2=45*.25
+#probabilidades, distribucion acumulada
+#percentiles
+#media, varianbza, desvest
+#E[2X+X^2]
+#realizar simulaciones para ambos casos
+
+n <- 100
+se <- 0:100
+fx1 <- dpois(se, l1)
+fx2 <- dpois(se, l2)
+Fx1 <- cumsum(fx1)
+Fx2 <- cumsum(fx2)
+
+plot(fx2, type = "l")
+lines(fx1, col = "red")
+plot(Fx2, type = "l")
+lines(Fx1, col = "red")
+na <- c("Media","Varianz", "Desviacion estándar")
+info <- data.frame(c("Media","Varianz", "Desviacion estándar"), c(l1, l1, l1^.5), c(l2, l2, l2^.5))
+sp <- seq(0,1, by = 0.05)
+ss
+per <- qpois(sp, l1)
+per
+per2 <- qpois(sp, l2)
+infop <- data.frame(ss, per, per2)
+E1 <- (2*l1)+((l1^2)+l1)
+E2 <- (2*l2)+((l2^2)+l2)
+#P[X<=5]
+p5.1 <-ppois(5, l1)
+p5.2 <-ppois(5, l2)
+#P[7<=X<11]
+p711.1 <- ppois(10, l1)-ppois(6, l1)
+p711.2 <- ppois(10, l2)-ppois(6, l2)
+#P[X<=7UX>=3]= P[X<=7]+P[X>=3] = P[3<=X<=7]
+p37.1 <- ppois(7, l1)-ppois(2, l1)
+p37.2 <- ppois(7, l2)-ppois(2, l2)
+
+##simulacion
+
+
+simm1 <- rpois(10000, l1)
+min(simm1)
+hist(simm1)
+m1 <- mean(simm1)
+v1 <- var(simm1)
+
+simm2 <- rpois(10000, l2)
+min(simm2)
+hist(simm2)
+m <- mean(simm2)
+v <- var(simm2)
+
+
