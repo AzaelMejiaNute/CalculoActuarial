@@ -1,0 +1,49 @@
+#1)crear un vector de e^x * cos(x) para x=3,3.1,...,6 ERNESTO.GOMEZ
+x<-seq(3,6,by=0.1)
+x
+y<-(exp(x)*cos(x))
+y
+#2)calcular sumatoria de 10 a 100 para (i^3+4*i^2)
+x1<- seq(10,100)
+x1
+for ( i in 1:length(x1))
+{
+  v1<-(x1^3+4*x1^2)
+}
+v1
+sum(v1)
+#3) 
+xvec1<-seq(1,6)
+xvec1
+mmvec<-as.vector(length(xvec1)-2)
+for (i in 1:length(xvec1)-2)
+{
+  mmvec[i]<-(xvec1[i]+xvec1[i+1]+xvec1[i+2])/3
+
+}
+  mmvec
+funmm<-function(i) return((xvec1[i]+xvec1[i+1]+xvec1[i+2])/3)
+funmm(xvec1)  
+#4)yj|>|xj|
+
+xvec<-rnorm(20, mean = 0, sd =1 )
+xvec
+x2<-mean(xvec)
+x2
+if (x2>0){
+  yvec<-(rexp(20,rate = 1/x2))
+yvec}
+if (x2<0){
+yvec<-( rexp(20,rate = 1/-x2))
+yvec}
+k=0
+for(i in 1:20)
+{
+if (abs(yvec[i])>abs(xvec[i]))
+  k=k+1
+}
+##5
+
+xvec
+yvec
+k
