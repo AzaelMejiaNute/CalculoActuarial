@@ -1,0 +1,15 @@
+u <- 1:30
+ex <- dexp(u,4.81)+1
+?dexp
+F <- cumsum(ex)
+plot(u, ex, type = "l", xlab = "Siniestros Exponencial", ylab = "f(x)")
+pexp(6)
+a <- rexp(1000, 5.81)
+a
+hist(a)
+w <- seq(0,1,.1)
+w
+bet <- .5+(dbeta(w, 0.167, 3.37 )/3)
+?dbeta
+bet
+plot(w, bet, type = "l", xlab = "Siniestros Beta", ylab = "f(x)")
