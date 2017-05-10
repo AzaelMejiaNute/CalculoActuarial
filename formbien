@@ -1,0 +1,37 @@
+u <- 0:10
+geo <- (dgeom(u, .9))
+Fx1 <- cumsum(geo)
+plot(u, geo,type = "l", xlab = "Siniestros", ylab = "f(x)")
+plot(Fx1,type = "l", xlab = "Siniestros", ylab = "F(x)")
+
+g <- rgeom(1000, .9)
+
+po <- dpois(u, 1)
+Fx2 <- cumsum(po)
+plot(u, po,type = "l", xlab = "Siniestros", ylab = "f(x)")
+plot(Fx2,type = "l", xlab = "Siniestros", ylab = "F(x)")
+
+p <- rpois(1000, 1)
+
+summary(g)
+
+agp <- data.frame(g,p)
+agp$gp[as.numeric(agp$g) == 0  |  as.numeric(agp$g) == 1] <- 1
+agp$gp[as.numeric(agp$g) == 2]<- 2
+agp$gp[as.numeric(agp$g) == 3]<- 3
+agp$gp[as.numeric(agp$g) == 4]<- 4
+agp$gp[as.numeric(agp$g) == 5]<- 5
+agp$gp[as.numeric(agp$g) == 6]<- 6
+agp$pp[as.numeric(agp$p) == 0  |  as.numeric(agp$p) == 1] <- 1
+agp$pp[as.numeric(agp$p) == 2]<- 2
+agp$pp[as.numeric(agp$p) == 3]<- 3
+agp$pp[as.numeric(agp$p) == 4]<- 4
+agp$pp[as.numeric(agp$p) == 5]<- 5
+agp$pp[as.numeric(agp$p) == 6]<- 6
+
+
+par(mfrow = c(2,2))
+hist(agp$gp, main = "Siniestros con moneda nacional", xlab = "Número de siniestros", ylab = "Frecuencia")
+hist(agp$pp, main = "Siniestros con moneda extranjera", xlab = "Número de siniestros", ylab = "Frecuencia")
+plot(u, geo,type = "l", main = "Siniestros con moneda nacional", xlab = "Siniestros", ylab = "f(x)")
+plot(u, po,type = "l", main = "Siniestros con moneda extranjera", xlab = "Siniestros", ylab = "f(x)")
