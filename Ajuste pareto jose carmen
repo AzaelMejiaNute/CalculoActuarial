@@ -412,3 +412,44 @@ ES<-sum(seq(1:4)*FS)
 VS<-sum((seq(1:4)-ES)^2*FS)
 ES
 VS
+
+####### AJUSTES #########
+##### simulacion de una poisson  #####
+n <- 1000
+x <- rpois(n,3)
+hist(x)
+install.packages("vcd")
+require(vcd)
+ajuste <- goodfit(x, type = "poisson", method = "MinChisq")
+ajuste
+ajuste$par
+summary(ajuste)
+plot(ajuste)
+
+##### simulacion de una normal  ######
+
+
+x <- rnorm(n,20,3)
+y <- rgamma(n,1,3)
+par(mfrow =c(1,2))
+hist(x, col = "red")
+hist(y, col = "Blue")
+ajusten <- fitdist(x, distr = "norm")
+ajusteg <- fitdist(y, distr = "gamma")
+ajusten$estimate
+ajusteg$estimate
+plot(ajusten)
+plot(ajusteg)
+media <- ajusten$estimate[1]
+sd <- ajusten$estimate[2]
+she <- ajusteg$estimate[1]
+rat <- ajusteg$estimate[2]
+
+##prueba de ajuste normal
+shapiro.test(x)
+##si W es cercano a 1, lo datos si se distribuyen normalmente
+
+ajus <- fitdist(y, distr = "norm")
+plot(ajus)
+
+
